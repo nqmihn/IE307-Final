@@ -4,7 +4,7 @@ import { View } from "react-native";
 const Order = () => {
   return (
     <View>
-      <Text>Order</Text>
+      <Text className="text-center">Order</Text>
     </View>
   );
 };
