@@ -1,4 +1,4 @@
-export const exampleData = [
+export const product = [
     { id: 1, name: "Alpha Product", price: 29.99, sold: 100 },
     { id: 2, name: "Beta Item", price: 19.99, sold: 150 },
     { id: 3, name: "Gamma Deluxe Product", price: 39.99, sold: 200 },

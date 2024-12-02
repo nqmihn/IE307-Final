@@ -1,9 +1,10 @@
 import Entypo from "@expo/vector-icons/Entypo";
 import { Text, View } from "react-native";
 import { ProductCard } from "./productCard";
-import { exampleData } from "./exampleData";
+import { product } from "@/constants/product";
 
-export default function ProductList() {
+
+export const ProductList = () => {
   return (
     <View className="mb-6 flex gap-4">
       <View className="flex-row justify-between items-center">
@@ -13,7 +14,7 @@ export default function ProductList() {
           <Entypo name="chevron-thin-right" size={14} color="gray" />
         </Text>
       </View>
-      <ProductCard data={exampleData} />
+      <ProductCard data={product} />
     </View>
   );
 }

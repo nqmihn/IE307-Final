@@ -2,10 +2,11 @@ import { logout } from "@/libs/appwrite";
 import { useUserStore } from "@/store/user";
 import { Link } from "expo-router";
 import { Pressable, ScrollView, Text } from "react-native";
-import ProductList from "./productList";
+
 import { TrendingProduct } from "./trendingProduct";
 import { HomeTitle } from "./homeTitle";
 import { SearchBar } from "./searchBar";
+import { ProductList } from "./productList";
 
 const Home = () => {
   const userStore = useUserStore();
