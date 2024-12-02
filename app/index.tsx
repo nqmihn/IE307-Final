@@ -1,12 +1,13 @@
 import { useUserStore } from "@/store/user";
+import { Link } from "expo-router";
 import { Text } from "react-native";
 import { View } from "react-native";
 
 const Home = () => {
-  const user = useUserStore();
   return (
     <View>
-      <Text className="mt-40"> Home: {user.token !== '' ? '1' : '2' }</Text>
+      <Text className="mt-40"> Home</Text>
+      <Link href="/(auth)/sign-in"> Sign In </Link>
     </View>
   );
 };

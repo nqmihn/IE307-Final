@@ -1,4 +1,3 @@
-
 import { Tabs } from "expo-router";
 import "../global.css";
 import { View } from "react-native";
@@ -77,6 +76,18 @@ export default function RootLayout() {
               </View>
             );
           },
+        }}
+      />
+      <Tabs.Screen
+        name="(auth)/sign-in"
+        options={{
+          tabBarButton: () => null,
+        }}
+      />
+      <Tabs.Screen
+        name="(auth)/sign-up"
+        options={{
+          tabBarButton: () => null,
         }}
       />
     </Tabs>
