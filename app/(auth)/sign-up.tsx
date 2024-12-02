@@ -29,7 +29,7 @@ const SignUp = () => {
       if (res) {
         const userStore = useUserStore();
         userStore.login(email, res?.userId, res.$id);
-        router.replace("/");
+        router.replace("/Home");
         Alert.alert("Success", "Sign up successfully");
       }
     } catch (e: any) {

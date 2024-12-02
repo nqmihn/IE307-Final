@@ -24,7 +24,7 @@ const SignIn = () => {
       setForm({ email: "", password: "" });
       if (res) {
         userStore.login(form.email, res.userId, res.$id);
-        router.replace("/");
+        router.replace("/Home");
         Alert.alert("Success", "Sign in successfully");
       }
     } catch (e: any) {
