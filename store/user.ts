@@ -1,13 +1,24 @@
 import { create } from "zustand";
 interface UserState {
   isLogin: boolean;
-  token: string;
-  login: (token: string) => void;
+  email: string;
+  id: string;
+  sessionId: string;
+  login: (email: string, id: string, sessionId: string) => void;
   logout: () => void;
 }
 export const useUserStore = create<UserState>()((set) => ({
   isLogin: false,
-  token: "",
-  login: (token: string) => set((state) => ({ isLogin: true, token: token })),
-  logout: () => set((state) => ({ isLogin: false, token: "" })),
+  email: "",
+  id: "",
+  sessionId: "",
+  login: (email: string, id: string, sessionId: string) =>
+    set((state) => ({
+      isLogin: true,
+      email: email,
+      id: id,
+      sessionId: sessionId,
+    })),
+  logout: () =>
+    set((state) => ({ isLogin: false, email: "", id: "", sessionId: "" })),
 }));

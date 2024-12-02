@@ -1,22 +1,36 @@
 import FormButton from "@/components/FormButton";
 import FormField from "@/components/FormField";
-import { Link } from "expo-router";
+import { logout, signIn } from "@/libs/appwrite";
+import { useUserStore } from "@/store/user";
+import { Link, router } from "expo-router";
 import { useState } from "react";
-import { Text } from "react-native";
-import { Alert } from "react-native";
-import { ScrollView } from "react-native";
-import { View } from "react-native";
+import { Alert, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const SignIn = () => {
+  const userStore = useUserStore();
   const [form, setForm] = useState<{ email: string; password: string }>({
     email: "",
     password: "",
   });
   const [isSubmitting, setSubmitting] = useState(false);
-  const submit = () => {
+  const submit = async () => {
     if (form.email === "" || form.password === "") {
       Alert.alert("Error", "Please fill in all fields");
+      setSubmitting(true);
+    }
+    try {
+      const res = await signIn(form.email, form.password);
+      setForm({ email: "", password: "" });
+      if (res) {
+        userStore.login(form.email, res.userId, res.$id);
+        router.replace("/");
+        Alert.alert("Success", "Sign in successfully");
+      }
+    } catch (e: any) {
+      Alert.alert("Error", e.message);
+    } finally {
+      setSubmitting(false);
     }
   };
   return (

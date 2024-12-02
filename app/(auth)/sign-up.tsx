@@ -1,11 +1,10 @@
 import FormButton from "@/components/FormButton";
 import FormField from "@/components/FormField";
-import { Link } from "expo-router";
+import { createUser } from "@/libs/appwrite";
+import { useUserStore } from "@/store/user";
+import { Link, router } from "expo-router";
 import { useState } from "react";
-import { ScrollView } from "react-native";
-import { Dimensions } from "react-native";
-import { Text } from "react-native";
-import { View } from "react-native";
+import { Alert, Dimensions, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const SignUp = () => {
@@ -14,14 +13,31 @@ const SignUp = () => {
     email: string;
     password: string;
     name: string;
-    phone: string;
   }>({
     name: "",
     email: "",
     password: "",
-    phone: "",
   });
-  const submit = () => {};
+  const submit = async () => {
+    if (form.email === "" || form.password === "" || form.name === "") {
+      Alert.alert("Error", "Please fill in all fields");
+    }
+    setSubmitting(true);
+    const { email, name, password } = form;
+    try {
+      const res = await createUser(email, password, name);
+      if (res) {
+        const userStore = useUserStore();
+        userStore.login(email, res?.userId, res.$id);
+        router.replace("/");
+        Alert.alert("Success", "Sign up successfully");
+      }
+    } catch (e: any) {
+      Alert.alert("Error", e.message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
