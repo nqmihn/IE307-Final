@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { TouchableOpacity } from "react-native";
-import { Image } from "react-native";
 import { TextInput } from "react-native";
 import { Text } from "react-native";
 import { View } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { TextInputProps } from "react-native";
+import Entypo from "@expo/vector-icons/Entypo";
 interface FormFieldProps extends TextInputProps {
   title: string;
   value: string;
@@ -29,7 +29,7 @@ const FormField = ({
 
       <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary flex flex-row items-center">
         <TextInput
-          className="flex-1 text-white font-psemibold text-base"
+          className="flex-1 text-white font-psemibold text-base outline-none"
           value={value}
           placeholder={placeholder}
           placeholderTextColor="#7B7B8B"
@@ -40,7 +40,11 @@ const FormField = ({
 
         {title === "Password" && (
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-            <AntDesign name="eye" size={24} color="black" />
+            {!showPassword ? (
+              <AntDesign name="eye" size={24} color="white" />
+            ) : (
+              <Entypo name="eye-with-line" size={24} color="white" />
+            )}
           </TouchableOpacity>
         )}
       </View>
