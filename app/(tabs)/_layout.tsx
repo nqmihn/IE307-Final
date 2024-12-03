@@ -17,7 +17,7 @@ export default function RootLayout() {
       }}
     >
       <Tabs.Screen
-        name="Home/index"
+        name="Home"
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => {
@@ -114,6 +114,26 @@ export default function RootLayout() {
       />
       <Tabs.Screen
         name="edit-profile"
+        options={{ tabBarButton: () => null, headerShown: false }}
+      />
+      <Tabs.Screen
+        name="Product/[id]/index"
+        options={{ tabBarButton: () => null, headerShown: false }}
+      />
+      <Tabs.Screen
+        name="Product/[id]/Select"
+        options={{ tabBarButton: () => null, headerShown: false }}
+      />
+      <Tabs.Screen
+        name="Product/[id]/Header"
+        options={{ tabBarButton: () => null, headerShown: false }}
+      />
+      <Tabs.Screen
+        name="Product/[id]/not-found"
+        options={{ tabBarButton: () => null, headerShown: false }}
+      />
+      <Tabs.Screen
+        name="Product/[id]/Detail"
         options={{ tabBarButton: () => null, headerShown: false }}
       />
     </Tabs>
