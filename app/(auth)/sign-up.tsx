@@ -8,6 +8,7 @@ import { Alert, Dimensions, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const SignUp = () => {
+  const userStore = useUserStore();
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState<{
     email: string;
@@ -27,7 +28,6 @@ const SignUp = () => {
     try {
       const res = await createUser(email, password, name);
       if (res) {
-        const userStore = useUserStore();
         userStore.login(
           {
             email: res.profile.documents[0].email,
@@ -35,9 +35,9 @@ const SignUp = () => {
             name: res.profile.documents[0].name,
           },
           res?.session.userId,
-          res.session.$id,
+          res.session.$id
         );
-        router.replace("/Home");
+        router.push("/Home");
         Alert.alert("Success", "Sign up successfully");
       }
     } catch (e: any) {
