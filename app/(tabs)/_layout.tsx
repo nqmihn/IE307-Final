@@ -112,6 +112,10 @@ export default function RootLayout() {
           },
         }}
       />
+      <Tabs.Screen
+        name="edit-profile"
+        options={{ tabBarButton: () => null, headerShown: false }}
+      />
     </Tabs>
   );
 }

@@ -23,7 +23,11 @@ const SignIn = () => {
       const res = await signIn(form.email, form.password);
       setForm({ email: "", password: "" });
       if (res) {
-        userStore.login(form.email, res.userId, res.$id);
+        userStore.login(
+          { email: res.profile.documents[0].email, avatarUrl: res.profile.documents[0].avatar, name: res.profile.documents[0].name },
+          res.session.userId,
+          res.session.$id,
+        );
         router.replace("/Home");
         Alert.alert("Success", "Sign in successfully");
       }

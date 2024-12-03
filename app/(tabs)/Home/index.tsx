@@ -10,6 +10,10 @@ import { ProductList } from "./productList";
 
 const Home = () => {
   const userStore = useUserStore();
+  const handleLogout = async () => {
+    await logout(userStore.sessionId);
+    userStore.logout();
+  };
   return (
     <ScrollView className="px-4 flex gap-4">
       <HomeTitle />
@@ -17,7 +21,7 @@ const Home = () => {
       <TrendingProduct />
       <ProductList />
       <Link href="/(auth)/sign-in"> Sign In </Link>
-      <Pressable onPress={() => logout(userStore.sessionId)}>
+      <Pressable onPress={handleLogout}>
         <Text>Log out</Text>
       </Pressable>
     </ScrollView>

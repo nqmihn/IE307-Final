@@ -7,6 +7,7 @@ import {
   APPWRITE_USER,
 } from "@/constants/env";
 import { IAppWriteConfig } from "@/types/appwrite";
+import { DocumentPickerAsset } from "expo-document-picker";
 import {
   Client,
   Account,
@@ -14,6 +15,7 @@ import {
   Databases,
   Avatars,
   Query,
+  Storage,
 } from "react-native-appwrite";
 
 export const appwriteConfig: IAppWriteConfig = {
@@ -37,6 +39,7 @@ client
 const account = new Account(client);
 const database = new Databases(client);
 const avatar = new Avatars(client);
+const storage = new Storage(client);
 
 export const createUser = async (
   email: string,
@@ -65,11 +68,18 @@ export const createUser = async (
 export const signIn = async (email: string, password: string) => {
   try {
     const session = await account.createEmailPasswordSession(email, password);
-    console.log(session);
     if (!session) {
       return;
     }
-    return session;
+    console.log(session.$id);
+    const profile = await getProfile();
+    await database.updateDocument(
+      appwriteConfig.dbId,
+      appwriteConfig.userCollectionId,
+      profile.documents[0].$id,
+      { sessionId: session.$id },
+    );
+    return { session, profile };
   } catch (e: any) {
     console.log(e);
     throw new Error(e.message);
@@ -91,6 +101,76 @@ export const getProfile = async () => {
       [Query.equal("accountId", user.$id)],
     );
     return userDetail;
+  } catch (e: any) {
+    console.log(e);
+    throw new Error(e.message);
+  }
+};
+
+export const getMe = async () => {
+  try {
+    const user = await account.get();
+    if (!user) {
+      throw new Error("User not found!");
+    }
+    const userDetail = await database.listDocuments(
+      appwriteConfig.dbId,
+      appwriteConfig.userCollectionId,
+      [Query.equal("accountId", user.$id)],
+    );
+    return { userDetail, user };
+  } catch (e: any) {
+    console.log(e);
+    throw new Error(e.message);
+  }
+};
+
+export const uploadFile = async (file: DocumentPickerAsset) => {
+  if (!file) return;
+  const { mimeType, ...rest } = file;
+  const asset = { type: mimeType, ...rest };
+  try {
+    const uploadedFile = await storage.createFile(
+      appwriteConfig.storageCollectionId,
+      ID.unique(),
+      asset as any,
+    );
+    const url = await getFilePreview(uploadedFile.$id);
+    return url;
+  } catch {
+    throw new Error("Upload file failed!");
+  }
+};
+
+export const getFilePreview = async (fileId: string) => {
+  try {
+    const fileUrl = storage.getFilePreview(
+      appwriteConfig.storageCollectionId,
+      fileId,
+    );
+    if (!fileUrl) {
+      throw new Error("File not found!");
+    }
+    return fileUrl.toString();
+  } catch (e: any) {
+    throw new Error(e.message);
+  }
+};
+
+export const updateProfile = async (data: {
+  email: string;
+  avatar: string;
+  name: string;
+}) => {
+  try {
+    console.log(data)
+    const profile = await getProfile();
+    await database.updateDocument(
+      appwriteConfig.dbId,
+      appwriteConfig.userCollectionId,
+      profile.documents[0].$id,
+      data,
+    );
   } catch (e: any) {
     console.log(e);
     throw new Error(e.message);

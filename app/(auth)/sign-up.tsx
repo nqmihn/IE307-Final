@@ -28,7 +28,15 @@ const SignUp = () => {
       const res = await createUser(email, password, name);
       if (res) {
         const userStore = useUserStore();
-        userStore.login(email, res?.userId, res.$id);
+        userStore.login(
+          {
+            email: res.profile.documents[0].email,
+            avatarUrl: res.profile.documents[0].avatar,
+            name: res.profile.documents[0].name,
+          },
+          res?.session.userId,
+          res.session.$id,
+        );
         router.replace("/Home");
         Alert.alert("Success", "Sign up successfully");
       }
