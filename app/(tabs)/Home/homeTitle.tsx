@@ -5,7 +5,7 @@ export const HomeTitle = () => {
   return (
     <View className="pt-4 pb-2 flex-row justify-between items-center">
       <View>
-        <Text className="text-md ">Welcome back</Text>
+        <Text className="text-md ">Welcome to</Text>
         <Text className="text-2xl font-bold">Ecommerce Store</Text>
       </View>
       <Ionicons name="logo-amplify" size={40} />
