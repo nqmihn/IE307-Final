@@ -6,6 +6,8 @@ import { Button } from "react-native";
 import { Text } from "react-native";
 import { FlatList, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import { Link } from "expo-router";
 
 const Cart = () => {
   const cartStore = useCartStore();
@@ -25,26 +27,37 @@ const Cart = () => {
   }, 0);
   return (
     <SafeAreaView className="bg-white h-full pt-1 px-5">
-      <FlatList
-        data={cartStore.carts}
-        renderItem={(item) => (
-          <CartItem
-            productItem={item.item}
-            handleAddToCart={handleAddToCart}
-            handleRemoveCart={handleRemoveCart}
+      {cartStore.carts.length > 0 ? (
+        <View>
+          <FlatList
+            data={cartStore.carts}
+            renderItem={(item) => (
+              <CartItem
+                productItem={item.item}
+                handleAddToCart={handleAddToCart}
+                handleRemoveCart={handleRemoveCart}
+              />
+            )}
+            showsVerticalScrollIndicator={false}
           />
-        )}
-        showsVerticalScrollIndicator={false}
-      />
-      <View className="h-[1] bg-secondary my-1" />
-      <View className="flex flex-row justify-between items-center my-3">
-        <Text className="font-bold text-2xl w-[40%]">
-          Total: ${Math.round(total * 100) / 100}
-        </Text>
-        <TouchableOpacity className="w-[50%]">
-          <Button title="Checkout" color={"#FF9C01"} />
-        </TouchableOpacity>
-      </View>
+          <View className="h-[1] bg-secondary my-1" />
+          <View className="flex flex-row justify-between items-center my-3">
+            <Text className="font-bold text-2xl w-[40%]">
+              ${Math.round(total * 100) / 100}
+            </Text>
+            <TouchableOpacity className="w-[50%]">
+              <Button title="Checkout" color={"#FF9C01"} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      ) : (
+        <View className="flex-1 justify-center items-center">
+          <AntDesign name="shoppingcart" size={50} color="black" className="mb-2" />
+          <Text>
+            Your cart is empty! <Link href="/(tabs)/Home/" className="font-bold">Go shopping </Link>
+          </Text>
+        </View>
+      )}
     </SafeAreaView>
   );
 };
