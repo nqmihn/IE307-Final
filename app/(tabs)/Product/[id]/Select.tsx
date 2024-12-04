@@ -4,16 +4,29 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useEffect, useState } from "react";
 import { Pressable, Text, TouchableOpacity, View } from "react-native";
+import { useCartStore } from "@/store/cart";
+import { Alert } from "react-native";
 
 interface SelectVariantProps {
   data: productType;
   id: number;
 }
 const SelectVariant = ({ data, id }: SelectVariantProps) => {
+  const cartStore = useCartStore();
   const [quantity, setQuantity] = useState<number>(1);
   const [selectedVariant, setSelectedVariant] = useState<string>(
-    data ? data.variants[0] : ""
+    data ? data.variants[0] : "",
   );
+  const handleAddToCart = () => {
+    cartStore.addToCart({
+      productId: id,
+      quantity: quantity,
+      variant: data.variants.findIndex((v) => v == selectedVariant),
+    });
+    Alert.alert("Add to cart success!");
+    setQuantity(1);
+    setSelectedVariant(data ? data.variants[0] : "");
+  };
   useEffect(() => {
     setQuantity(1);
     setSelectedVariant(data ? data.variants[0] : "");
@@ -80,13 +93,18 @@ const SelectVariant = ({ data, id }: SelectVariantProps) => {
         </View>
       </View>
       <View className="flex-row gap-4">
-        <TouchableOpacity className="rounded-xl border border-blue-600 flex-row justify-center items-center w-44 h-14">
+        <TouchableOpacity
+          className="rounded-xl border border-blue-600 flex-row justify-center items-center w-44 h-14"
+          onPress={handleAddToCart}
+        >
           <MaterialCommunityIcons name="cart-variant" size={24} color="blue" />
           <Text className="text-blue-600 text-2xl">Add Cart</Text>
         </TouchableOpacity>
         <TouchableOpacity className="rounded-xl bg-red-500 flex-row justify-center items-center w-52 h-14">
           <FontAwesome5 name="wallet" size={24} color="white" />
-          <Text className="text-white text-2xl font-medium">{"  Buy Now!"}</Text>
+          <Text className="text-white text-2xl font-medium">
+            {"  Buy Now!"}
+          </Text>
         </TouchableOpacity>
       </View>
     </>

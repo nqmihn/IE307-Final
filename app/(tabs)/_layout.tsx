@@ -43,7 +43,8 @@ export default function RootLayout() {
       <Tabs.Screen
         name="cart"
         options={{
-          headerShown: false,
+          headerShown: true,
+          title: "Cart",
           tabBarIcon: ({ focused }) => {
             return (
               <View className="items-center justify-center">
