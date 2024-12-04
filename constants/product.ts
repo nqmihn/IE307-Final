@@ -11,16 +11,6 @@ export const categories = [
   { id: 10, name: "Health" },
 ];
 
-export type productType = {
-  id: number;
-  name: string;
-  price: number;
-  sold: number;
-  categoryId: number;
-  rate: number;
-  description: string;
-  variants: string[];
-};
 
 export const product = [
   { id: 1, name: "Alpha Product", price: 29.99, sold: 100, categoryId: 1, rate: 4.5, description: "This is a great product for your daily needs. It is reliable and affordable.", variants: ["Red", "Blue", "Green"] },
@@ -46,10 +36,3 @@ export const product = [
 ];
 
 
-export const getProductById = (id: number) => {
-  return product.find((item) => item.id === id);
-};
-
-export const getCategoryById = (id: number) => {
-  return categories.find((category) => category.id === id);
-};

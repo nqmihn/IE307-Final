@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { View } from "react-native";
 import "../global.css";
 import GetMeComponent from "@/components/GetMe";
+import { SafeAreaView } from "react-native-safe-area-context";
 export default function RootLayout() {
   const router = useRouter();
   useEffect(() => {
@@ -12,7 +13,6 @@ export default function RootLayout() {
 
   return (
     <>
-      <View className="pt-12"></View>
       <GetMeComponent />
       <Stack>
         <Stack.Screen

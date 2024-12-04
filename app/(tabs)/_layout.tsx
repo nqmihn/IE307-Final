@@ -117,23 +117,11 @@ export default function RootLayout() {
         options={{ tabBarButton: () => null, headerShown: false }}
       />
       <Tabs.Screen
-        name="Product/[id]/index"
+        name="Product/[id]"
         options={{ tabBarButton: () => null, headerShown: false }}
       />
       <Tabs.Screen
-        name="Product/[id]/Select"
-        options={{ tabBarButton: () => null, headerShown: false }}
-      />
-      <Tabs.Screen
-        name="Product/[id]/Header"
-        options={{ tabBarButton: () => null, headerShown: false }}
-      />
-      <Tabs.Screen
-        name="Product/[id]/not-found"
-        options={{ tabBarButton: () => null, headerShown: false }}
-      />
-      <Tabs.Screen
-        name="Product/[id]/Detail"
+        name="Filter"
         options={{ tabBarButton: () => null, headerShown: false }}
       />
     </Tabs>

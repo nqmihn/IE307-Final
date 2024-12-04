@@ -1,12 +1,12 @@
-import { productType } from "@/constants/product";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+
+import { IProductBase } from "@/types/product";
 import { useEffect, useState } from "react";
 import { Pressable, Text, TouchableOpacity, View } from "react-native";
-
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import AntDesign from "@expo/vector-icons/AntDesign";
 interface SelectVariantProps {
-  data: productType;
+  data: IProductBase;
   id: number;
 }
 const SelectVariant = ({ data, id }: SelectVariantProps) => {
