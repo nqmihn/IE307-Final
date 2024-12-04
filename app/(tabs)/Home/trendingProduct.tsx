@@ -1,9 +1,14 @@
 import { getTopSoldProducts } from "@/libs/product";
-import { Image, ScrollView, Text, View } from "react-native";
+import { Image, Pressable, ScrollView, Text, View } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { useRouter } from "expo-router";
 
 export const TrendingProduct = () => {
   const trendingProduct = getTopSoldProducts();
+  const router = useRouter()
+  const handleNavigate = (id: number) => {
+    router.push(`/(tabs)/Product/${id}`) 
+  } 
   return (
     <View className="flex gap-4 mb-6">
       <Text className="font-bold text-xl">Trending Products</Text>
@@ -13,9 +18,10 @@ export const TrendingProduct = () => {
         className="h-60 w-full flex-row"
       >
         {trendingProduct.map((item, i) => (
-          <View
+          <Pressable
             key={i}
             className="relative h-full mr-3 rounded-xl overflow-hidden w-40"
+            onPress={() => handleNavigate(item.id)}
           >
             <Image src={item.image[0]} className="w-full h-full opacity-90" />
             <View className="z-10 absolute inset-0 bg-black opacity-40 w-full h-full rounded-xl" />
@@ -26,7 +32,7 @@ export const TrendingProduct = () => {
                 {item.sold}
               </Text>
             </View>
-          </View>
+          </Pressable>
         ))}
       </ScrollView>
     </View>
