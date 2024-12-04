@@ -12,7 +12,7 @@ export const SearchBar = () => {
       className="flex-row gap-2 items-center px-3 py-3 mb-6 border justify-between border-black rounded-2xl"
       onPress={() => searchNavigate()}
     >
-      <Text className="text-gray-400">What are you looking for today?</Text>
+      <Text className="text-gray-400" >What are you looking for today?</Text>
       <AntDesign name="search1" size={20} color="black" />
     </Pressable>
   );

@@ -1,16 +1,14 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { useNavigation } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SearchBar from "./searchBar";
 import { useEffect, useRef, useState } from "react";
-import {
-  getProductNameListByKeyword,
-  searchProductsByKeyword,
-} from "@/libs/product";
+import { getProductNameListByKeyword } from "@/libs/product";
 
 const Header = () => {
   const navigation = useNavigation();
+  const router = useRouter();
   const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<string[]>([]);
   const [debouncedQuery, setDebouncedQuery] = useState<string>("");
@@ -48,9 +46,9 @@ const Header = () => {
     fetchSearchResults();
   }, [debouncedQuery]);
 
-  const handleResultPress = (item: any) => {
-    // Handle the result selection (e.g., navigate to product details)
+  const handleResultPress = (keyword: string) => {
     setIsDropdownVisible(false);
+    router.push(`/(tabs)/Filter/${keyword}`)
   };
   return (
     <View>

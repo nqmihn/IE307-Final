@@ -7,6 +7,7 @@ export interface IProductBase {
   rate: number;
   description: string;
   variants: string[];
+  image: string[];
 };
 
 export interface IProductCard {
@@ -14,4 +15,5 @@ export interface IProductCard {
   name: string;
   price: number;
   sold: number;
+  image: string[];
 }
