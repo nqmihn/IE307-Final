@@ -4,9 +4,12 @@ import Header from "./Header";
 import { useCallback, useRef } from "react";
 import { useFocusEffect } from "expo-router";
 
+import { recommendProduct } from "@/libs/product";
+import { ProductCard } from "@/components/productCard";
+
 const FilterPage = () => {
   const slideAnim = useRef(new Animated.Value(100)).current;
-
+  const suggestData = recommendProduct(4);
   useFocusEffect(
     useCallback(() => {
       slideAnim.setValue(100);
@@ -20,8 +23,13 @@ const FilterPage = () => {
   return (
     <Animated.View style={{ transform: [{ translateX: slideAnim }] }}>
       <Header />
-      <View className='h-96 justify-center items-center flex'>
-        <Text>Có thể thêm vài sản phẩm gợi ý khi search đang null</Text>
+      <View className="pt-24 justify-center flex gap-4 px-4">
+        <View>
+          <Text className="text-2xl font-semibold italic">
+            Maybe you will like:
+          </Text>
+        </View>
+        <ProductCard data={suggestData} />
       </View>
     </Animated.View>
   );

@@ -1,17 +1,19 @@
-import { IProductCard } from "@/types/product";
 import { useLocalSearchParams } from "expo-router";
-import { ProductCard } from "../../Home/productCard";
+import Header from "../Header";
+import { getProductsListByKeyword } from "@/libs/product";
+import { View } from "react-native";
+import { ProductCard } from "@/components/productCard";
 
-interface resultPageProps {
-  data: IProductCard[];
-}
-const ResultPage = ({ data }: resultPageProps) => {
-  const keyword = useLocalSearchParams();
-
+const ResultPage = () => {
+  const param = useLocalSearchParams();
+  const filterData = getProductsListByKeyword(String(param.keyword));
   return (
-    <>
-      <ProductCard data={data} />
-    </>
+    <View>
+      <Header />
+      <View className="px-4 pt-6">
+        <ProductCard data={filterData} />
+      </View>
+    </View>
   );
 };
 

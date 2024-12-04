@@ -1,12 +1,7 @@
-import { Link, useRouter } from "expo-router";
-import { Pressable, Text, View } from "react-native";
+import { IProductCard } from "@/types/product";
+import { Link, useNavigation, useRouter } from "expo-router";
+import { Image, Pressable, Text, View } from "react-native";
 
-interface IProductCard {
-  id: number;
-  name: string;
-  price: number;
-  sold: number;
-}
 
 interface ProductCardProps {
   data: IProductCard[];
@@ -25,7 +20,7 @@ export const ProductCard = ({ data }: ProductCardProps) => {
           onPress={() => handlePress(product.id)}
           className="flex w-[48%] justify-between rounded-md overflow-hidden h-[18rem]"
         >
-          <View className="w-full h-[75%] rounded-md bg-gray-400"></View>
+          <Image src={product.image[0]} className="w-full h-[75%] rounded-md " />
           <View className="flex h-[25%]">
             <View className="px-2 flex-1 pt-2">
               <Text
