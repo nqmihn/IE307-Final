@@ -1,7 +1,7 @@
 import { Link, useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 
-interface product {
+interface IProductCard {
   id: number;
   name: string;
   price: number;
@@ -9,7 +9,7 @@ interface product {
 }
 
 interface ProductCardProps {
-  data: product[];
+  data: IProductCard[];
 }
 
 export const ProductCard = ({ data }: ProductCardProps) => {

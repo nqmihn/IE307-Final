@@ -1,11 +1,11 @@
-import { productType } from "@/constants/product";
+import { IProductBase } from "@/types/product";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import { useState } from "react";
 import { Text, View } from "react-native";
 
 interface DetailProps {
-  data: productType;
+  data: IProductBase;
 }
 const Detail = ({ data }: DetailProps) => {
   const [liked, setLiked] = useState<boolean>(false);
