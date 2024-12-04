@@ -30,9 +30,9 @@ const ProductDetail = () => {
   return (
     <Animated.View style={{ transform: [{ translateX: slideAnim }] }}>
       <Header />
-      <ScrollView className="flex gap-4 h-[60rem]">
+      <ScrollView className="flex gap-4 h-[54rem]">
         <View className="w-full h-[30rem] bg-gray-400"></View>
-        <View className="px-6 pt-6 flex gap-4">
+        <View className="px-6 pt-6 pb-12 flex gap-4">
           <Detail data={data} />
           <SelectVariant data={data} id={Number(id)} />
         </View>
