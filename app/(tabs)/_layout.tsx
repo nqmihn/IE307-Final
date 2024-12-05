@@ -1,6 +1,5 @@
 import { Tabs } from "expo-router";
 import { View } from "react-native";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import { Text } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
@@ -41,7 +40,7 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
-        name="cart"
+        name="Cart/index"
         options={{
           headerShown: true,
           title: "Cart",
@@ -66,7 +65,7 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
-        name="order"
+        name="Order"
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => {
@@ -90,7 +89,7 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="Profile/index"
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => {
@@ -114,7 +113,7 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
-        name="edit-profile"
+        name="Profile/edit-profile"
         options={{ tabBarButton: () => null, headerShown: false }}
       />
       <Tabs.Screen

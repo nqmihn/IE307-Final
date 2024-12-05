@@ -7,9 +7,12 @@ import { Text } from "react-native";
 import { FlatList, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
+import { useState } from "react";
 
 const Cart = () => {
+  const router = useRouter();
+  const [orderId, setOrderId] = useState<number>(8);
   const cartStore = useCartStore();
   const handleAddToCart = (cart: ICart) => {
     cartStore.addToCart(cart);
@@ -40,21 +43,29 @@ const Cart = () => {
             )}
             showsVerticalScrollIndicator={false}
           />
-          <View className="h-[1] bg-secondary my-1" />
+          <View className="h-1 bg-secondary my-1" />
           <View className="flex flex-row justify-between items-center my-3">
             <Text className="font-bold text-2xl w-[40%]">
               ${Math.round(total * 100) / 100}
             </Text>
             <TouchableOpacity className="w-[50%]">
-              <Button title="Checkout" color={"#FF9C01"} />
+              <Button title="Checkout" color={"#FF9C01"} onPress={() => router.push('/(tabs)/Order/OrderDetail')} />
             </TouchableOpacity>
           </View>
         </View>
       ) : (
         <View className="flex-1 justify-center items-center">
-          <AntDesign name="shoppingcart" size={50} color="black" className="mb-2" />
+          <AntDesign
+            name="shoppingcart"
+            size={50}
+            color="black"
+            className="mb-2"
+          />
           <Text>
-            Your cart is empty! <Link href="/(tabs)/Home/" className="font-bold">Go shopping </Link>
+            Your cart is empty!
+            <Link href="/(tabs)/Home/" className="font-bold">
+              Go shopping
+            </Link>
           </Text>
         </View>
       )}
