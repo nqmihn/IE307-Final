@@ -69,7 +69,7 @@ const Home = () => {
             <View className="mt-5 w-[90%] bg-white rounded-xl">
               <TouchableOpacity
                 onPress={() => {
-                  router.replace("/(tabs)/cart");
+                  router.replace("/(tabs)/Cart");
                 }}
               >
                 <View className="border-b-[1px] flex flex-row px-8 py-3 border-gray-400">
@@ -82,7 +82,7 @@ const Home = () => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  router.replace("/(tabs)/order");
+                  router.replace("/(tabs)/Order");
                 }}
               >
                 <View className="border-b-[1px] flex flex-row px-8 py-3 border-gray-400">
@@ -104,7 +104,7 @@ const Home = () => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  router.replace("/(tabs)/edit-profile");
+                  router.replace("/(tabs)/Profile/edit-profile");
                 }}
               >
                 <View className="border-b-[1px] flex flex-row px-8 py-3 border-gray-400">
